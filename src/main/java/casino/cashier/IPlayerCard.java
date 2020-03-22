@@ -1,5 +1,8 @@
 package casino.cashier;
 
+import ID.BetID;
+import ID.CardID;
+
 import java.util.Set;
 
 public interface IPlayerCard {

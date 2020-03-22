@@ -1,4 +1,4 @@
 package ID;
 
-public class BettingRoundID {
+public class BettingRoundID extends GeneralID {
 }

@@ -30,9 +30,9 @@ public interface ICashier {
      * @param card
      * @param betToCheck
      * @return
-     * @throws BetNotExceptedException
+     * //@throws BetNotExceptedException needs to be uncommented. Commented only to test the workflow for the gradle
      */
-    boolean checkIfBetIsValid(IPlayerCard card, Bet betToCheck) throws BetNotExceptedException;
+    boolean checkIfBetIsValid(IPlayerCard card, Bet betToCheck); //throws BetNotExceptedException; needs to be uncommented. Commented only to test the workflow for the gradle
 
     /**
      * add amount to the players card. No negative BetAmounts are allowed.

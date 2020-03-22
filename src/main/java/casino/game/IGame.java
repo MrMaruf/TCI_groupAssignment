@@ -29,9 +29,9 @@ public interface IGame {
      * @param bet the bet to be made on the betting round
      * @param gamingMachine gamingmachine which places bet on this game.
      * @return true when bet is accepted by the game, otherwise false.
-     * @throws NoCurrentRoundException when no BettingRound is currently active.
+     * //@throws NoCurrentRoundException when no BettingRound is currently active. || needs to be uncommented. Commented only to test the workflow for the gradle
      */
-    boolean acceptBet(Bet bet, IGamingMachine gamingMachine) throws NoCurrentRoundException;
+    boolean acceptBet(Bet bet, IGamingMachine gamingMachine); // throws NoCurrentRoundException; || needs to be uncommented. Commented only to test the workflow for the gradle
 
 
     /**
