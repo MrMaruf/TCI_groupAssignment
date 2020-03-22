@@ -1,6 +1,8 @@
 package bettingauthoritiyAPI;
 
 
+import ID.BettingRoundID;
+
 import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;

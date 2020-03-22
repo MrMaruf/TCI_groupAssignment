@@ -1,5 +1,7 @@
 package casino.bet;
 
+import ID.BetID;
+
 /**
  * immutable class.
  * keeps unique betID and moneyamount in the bet.

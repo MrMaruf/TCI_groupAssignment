@@ -1,6 +1,8 @@
 package bettingauthoritiyAPI;
 
 
+import ID.BettingRoundID;
+
 /**
  *
  */
@@ -13,6 +15,7 @@ public class BetTokenAuthority implements IBetTokenAuthority {
      * @param bettingRoundID
      * @return
      */
+
     @Override
     public BetToken getBetToken(BettingRoundID bettingRoundID){
         // create token
