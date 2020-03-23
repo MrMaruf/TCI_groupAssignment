@@ -12,10 +12,18 @@ public final class BettingAuthority {
     public BettingAuthority() {
     }
 
+    /**
+     * Returns logging
+     * @return IBetLoggingAuthority
+     */
     public IBetLoggingAuthority getLoggingAuthority() {
         return logging;
     }
 
+    /**
+     * Returns a token
+     * @return IBetTokenAuthority
+     */
     public IBetTokenAuthority getTokenAuthority() {
         return token;
     }

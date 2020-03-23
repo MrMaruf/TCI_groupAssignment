@@ -15,7 +15,6 @@ public class BetTokenAuthority implements IBetTokenAuthority {
      * @param bettingRoundID
      * @return
      */
-
     @Override
     public BetToken getBetToken(BettingRoundID bettingRoundID){
         // create token
@@ -27,7 +26,11 @@ public class BetTokenAuthority implements IBetTokenAuthority {
         return bettingBetToken;
     }
 
-
+    /**
+     * Generates a trully random integer based on the BetToken
+     * @param betToken
+     * @return random integer
+     */
     @Override
     public Integer getRandomInteger(BetToken betToken){
         // NOT RELEVANT TO KNOW THIS
