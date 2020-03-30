@@ -10,4 +10,6 @@ test:
   - src/*
   - build.gradle
 automerge:
-  - ./*
+  - documentation/*
+  - .gitignore
+  - README.md
