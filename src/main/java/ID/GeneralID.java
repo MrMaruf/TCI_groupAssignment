@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public abstract class GeneralID implements Comparable {
     private UUID id;
-// 2nd testing auto-merging
+// 3rd testing auto-merging
     /**
      * Generates an unique ID based on UUID.
      * <p>Creates an object.</p>
