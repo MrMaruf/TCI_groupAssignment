@@ -21,9 +21,9 @@ public class GameMachineTest {
         Bet bet = new Bet(betID, amount);
         BetResult winBet = new BetResult(bet, amount);
         PlayerCard card = mock(PlayerCard.class);
-
-        //act
         long amountincents_mock = 100;
+        //act
+
 
         when(betID.toString()).thenReturn("ABC_ID");
         when(amount.getAmountInCents()).thenReturn(amountincents_mock);
