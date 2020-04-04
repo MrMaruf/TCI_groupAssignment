@@ -1,16 +1,19 @@
 import ID.BettingRoundID;
-import bettingauthoritiyAPI.BetToken;
-import bettingauthoritiyAPI.BettingAuthority;
-import bettingauthoritiyAPI.IBetTokenAuthority;
+import bettingauthoritiyAPI.*;
+import casino.game.Game;
 import casino.game.IBettingRound;
 import casino.game.IGameRule;
+import org.junit.Test;
+import org.junit.Assert;
 
 import static org.mockito.Mockito.*;
 
 public class GameTest {
+@Test
 public void Game_startBettingRound_Should_Create_bettingRound_And_Log_Info_Test(){
-    //arrange
     BettingAuthority betAuth = mock(BettingAuthority.class);
+    IBetLoggingAuthority betLoggingAuthority = mock(IBetLoggingAuthority.class);
+    IBetTokenAuthority betTokenAuthority = mock(IBetTokenAuthority.class);
     IGameRule gRule = mock(IGameRule.class);
     Game sut = new Game(gRule, betAuth);
     IBetTokenAuthority betTokenAuth = mock(IBetTokenAuthority.class);
@@ -21,14 +24,15 @@ public void Game_startBettingRound_Should_Create_bettingRound_And_Log_Info_Test(
     //act
 
     when(betR.getBettingRoundID()).thenReturn(betRID);
-    when(betAuth.getTokenAuthority().getBetToken(betRID)).thenReturn(betToken);
-    when(sut.isBettingRoundFinished()).thenReturn(true);
-    when(sut.getBettingRound()).thenReturn(betR);
+    when(betTokenAuthority.getBetToken(betRID)).thenReturn(betToken);
+
+
     sut.startBettingRound();
 
     //assert
-    verify(sut.getBettingRound()).equals(betR);
+    Assert.assertEquals(sut.getBettingRound(), betR);
     verify(betAuth.getLoggingAuthority()).startBettingRound(betR);
+
 
 
 
