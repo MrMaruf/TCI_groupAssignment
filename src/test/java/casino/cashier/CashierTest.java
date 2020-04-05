@@ -6,6 +6,8 @@ import bettingauthoritiyAPI.BettingAuthority;
 import bettingauthoritiyAPI.IBetLoggingAuthority;
 import casino.bet.Bet;
 import casino.bet.MoneyAmount;
+import casino.idbuilder.ids.BetID;
+import casino.idbuilder.ids.CardID;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +16,7 @@ import org.mockito.Mock;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 
 public class CashierTest {
@@ -77,5 +80,19 @@ public class CashierTest {
         // assert
         Assert.assertTrue(isBetValid);
         Assert.assertEquals(c.moneyPerPlayerCard.get(playerCard).getAmountInCents(), 150);
+    }
+
+    @Test
+    public void returnGamblerCard_Should_Make_PlayerCard_object_detached_from_player_And_Log_Info_Test(){
+        // arrange
+        Cashier c = new Cashier(this.cards, this.betAuth);
+        IPlayerCard playerCard = c.distributeGamblerCard();
+
+        // act
+        c.returnGamblerCard(playerCard);
+
+        // assert
+        verify(this.bl).handInGamblingCard(any(CardID.class), any());
+        Assert.assertNull(c.moneyPerPlayerCard.get(playerCard));
     }
 }
