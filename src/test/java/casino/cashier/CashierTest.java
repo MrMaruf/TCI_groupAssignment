@@ -21,7 +21,6 @@ public class CashierTest {
     BettingAuthority betAuth;
     List<IPlayerCard> cards;
 
-
     @Before
     public void setUp(){
         this.bl = mock(IBetLoggingAuthority.class);
@@ -36,7 +35,6 @@ public class CashierTest {
         // arrange
         Cashier c = new Cashier(this.cards, this.betAuth);
         IPlayerCard emptyCard;
-
 
         // act
         emptyCard = c.distributeGamblerCard();
@@ -66,7 +64,7 @@ public class CashierTest {
     @Test
     public void checkIfBetIsValid_And_Card_Has_Enough_Money_Should_Return_TRUE_Test(){
         // arrange
-        ICashier c = new Cashier(this.cards, this.betAuth);
+        Cashier c = new Cashier(this.cards, this.betAuth);
         IPlayerCard playerCard = c.distributeGamblerCard();
         c.addAmount(playerCard, new MoneyAmount(200));
         Bet validBet = mock(Bet.class);
@@ -78,5 +76,6 @@ public class CashierTest {
 
         // assert
         Assert.assertTrue(isBetValid);
+        Assert.assertEquals(c.moneyPerPlayerCard.get(playerCard).getAmountInCents(), 150);
     }
 }

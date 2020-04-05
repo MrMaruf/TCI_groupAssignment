@@ -39,7 +39,13 @@ public class Cashier implements ICashier {
 
     @Override
     public boolean checkIfBetIsValid(IPlayerCard card, Bet betToCheck) {
-        return false;
+        long balance = this.moneyPerPlayerCard.get(card).getAmountInCents() -
+                betToCheck.getMoneyAmount().getAmountInCents();
+        if(balance<0){
+            return false;
+        }
+        this.moneyPerPlayerCard.put(card, new MoneyAmount(balance));
+        return true;
     }
 
     @Override
