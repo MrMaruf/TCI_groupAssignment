@@ -87,12 +87,12 @@ public class CashierTest {
         // arrange
         Cashier c = new Cashier(this.cards, this.betAuth);
         IPlayerCard playerCard = c.distributeGamblerCard();
-
+        when(playerCard.returnBetIDsAndClearCard()).thenReturn(null);
         // act
         c.returnGamblerCard(playerCard);
 
         // assert
-        verify(this.bl).handInGamblingCard(any(CardID.class), any());
+        verify(this.bl).handInGamblingCard(playerCard.getCardID(), null);
         Assert.assertNull(c.moneyPerPlayerCard.get(playerCard));
     }
 }

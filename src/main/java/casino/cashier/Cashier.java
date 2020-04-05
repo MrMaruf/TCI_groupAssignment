@@ -34,7 +34,8 @@ public class Cashier implements ICashier {
 
     @Override
     public void returnGamblerCard(IPlayerCard card) {
-
+        this.betAuth.getLoggingAuthority().handInGamblingCard(card.getCardID(), card.returnBetIDsAndClearCard());
+        this.moneyPerPlayerCard.put(card, null);
     }
 
     @Override
