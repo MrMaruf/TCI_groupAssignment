@@ -24,7 +24,13 @@ public class Player implements IPlayer {
 
     @Override
     public void removePlayerCard(IPlayerCard playerCard) {
-        playerCards.remove(playerCard);
+        if(playerCards.contains(playerCard)){
+            playerCards.remove(playerCard);
+        }
+        else{
+            throw new IllegalArgumentException("the player card is invalid");
+        }
+
     }
 
     @Override
