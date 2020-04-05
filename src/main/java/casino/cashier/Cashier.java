@@ -9,7 +9,7 @@ import java.util.List;
 
 
 public class Cashier implements ICashier {
-    HashMap<IPlayerCard, MoneyAmount> moneyPerPlayerCard;
+    protected HashMap<IPlayerCard, MoneyAmount> moneyPerPlayerCard;
     BettingAuthority betAuth;
 
     public Cashier(List<IPlayerCard> cards, BettingAuthority betAuth){
