@@ -3,6 +3,7 @@ package player;
 import casino.ICasino;
 import casino.cashier.IPlayerCard;
 import casino.cashier.PlayerCard;
+import casino.gamingmachine.GamingMachine;
 import casino.gamingmachine.IGamingMachine;
 
 import java.util.*;
@@ -50,8 +51,13 @@ public class Player implements IPlayer {
     }
 
     @Override
-    public void betOnMachine(IGamingMachine gamingMachine, IPlayerCard iPlayerCard, long amount) {
-        gamingMachine.connectCard(iPlayerCard);
-        gamingMachine.placeBet(amount);
+    public void betOnMachine(GamingMachine gamingMachine, IPlayerCard iPlayerCard, long amount) {
+        if(gamingMachine.getPlayerCard() == iPlayerCard){
+            gamingMachine.placeBet(amount);
+        }else{
+            gamingMachine.connectCard(iPlayerCard);
+            gamingMachine.placeBet(amount);
+        }
+
     }
 }

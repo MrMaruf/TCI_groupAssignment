@@ -1,6 +1,7 @@
 package player;
 
 import casino.cashier.IPlayerCard;
+import casino.gamingmachine.GamingMachine;
 import casino.gamingmachine.IGamingMachine;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface IPlayer {
 
     public List<IPlayerCard> getAllPlayerCards();
 
-    public void betOnMachine(IGamingMachine gamingMachine, IPlayerCard iPlayerCard, long amount);
+    public void betOnMachine(GamingMachine gamingMachine, IPlayerCard iPlayerCard, long amount);
 
 
 }
