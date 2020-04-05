@@ -24,7 +24,7 @@ public class Player implements IPlayer {
 
     @Override
     public void removePlayerCard(IPlayerCard playerCard) {
-
+        playerCards.remove(playerCard);
     }
 
     @Override
