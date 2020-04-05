@@ -1,6 +1,6 @@
 package bettingauthoritiyAPI;
 
-import ID.BettingRoundID;
+import casino.idbuilder.ids.BettingRoundID;
 
 public interface IBetTokenAuthority {
     BetToken getBetToken(BettingRoundID bettingRoundID);

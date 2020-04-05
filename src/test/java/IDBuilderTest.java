@@ -1,9 +1,5 @@
-package IDBuilderTest;
-
-import ID.BetID;
-import ID.BettingRoundID;
-import ID.CardID;
-import ID.GamingMachineID;
+import casino.idbuilder.IDBuilder;
+import casino.idbuilder.ids.*;
 import org.junit.Assert;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.instanceOf;

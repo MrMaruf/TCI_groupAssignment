@@ -1,4 +1,4 @@
-package ID;
+package casino.idbuilder.ids;
 
 import java.util.UUID;
 

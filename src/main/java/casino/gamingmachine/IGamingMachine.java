@@ -1,6 +1,6 @@
 package casino.gamingmachine;
 
-import ID.GamingMachineID;
+import casino.idbuilder.ids.GamingMachineID;
 import casino.bet.BetResult;
 import casino.cashier.IPlayerCard;
 
