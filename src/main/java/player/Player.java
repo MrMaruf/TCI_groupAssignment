@@ -42,8 +42,12 @@ public class Player implements IPlayer {
 
     @Override
     public void playOnGameMachine(IPlayerCard playerCard, GamingMachine gamingMachine) {
-        
-        gamingMachine.connectCard(playerCard);
+        if(gamingMachine.getPlayerCard() == playerCard){
+            throw new IllegalArgumentException("you cannot connect the same card again!");
+        }else{
+            gamingMachine.connectCard(playerCard);
+        }
+
     }
 
     @Override
