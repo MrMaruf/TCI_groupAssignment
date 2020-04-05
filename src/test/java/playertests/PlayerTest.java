@@ -63,21 +63,20 @@ public class PlayerTest {
         Bet bet = mock(Bet.class);
 
         //act
-        doNothing().when(casino).addGamingMachine(gameMachine);
-        when(casino.getGamingMachine(gameMachine)).thenReturn(gameMachine);
-        if(gameMachine != null){
-            doNothing().when(gameMachine).setGame(game);
-            when(gameMachine.getGame("name")).thenReturn(game);
-            if(game != null){
+        doNothing().when(casino).addGame("game", game);
+        if(game != null) {
+            if(casino.getAllGames().contains(game)) {
+                when(casino.getGame("game")).thenReturn(game);
                 when(game.acceptBet(bet,gameMachine)).thenReturn(true);
             }
         }
 
 
+
         sut.betOnMachine(gameMachine, card);
 
         //arrange
-        verify(gameMachine, times(1)).getGame(anyString());
+
         verify(game).acceptBet(bet, gameMachine);
         Assert.assertTrue(game.acceptBet(bet, gameMachine));
 
