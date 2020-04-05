@@ -117,6 +117,24 @@ public class CashierTest {
         Assert.assertEquals(c.moneyPerPlayerCard.get(playerCard).getAmountInCents(), 200);
     }
 
+    @Test
+    public void checkIfBetIsValid_Bet_Bigger_Than_Cards_MoneyAmountShould_Shoud_Return_False_Test(){
+        // arrange
+        Cashier c = new Cashier(this.cards, this.betAuth);
+        IPlayerCard playerCard = c.distributeGamblerCard();
+        c.addAmount(playerCard, new MoneyAmount(200));
+        Bet validBet = mock(Bet.class);
+        when(validBet.getMoneyAmount()).thenReturn(new MoneyAmount(250));
+        boolean isBetValid = false;
+
+        // act
+        isBetValid = c.checkIfBetIsValid(playerCard, validBet);
+
+        // assert
+        Assert.assertFalse(isBetValid);
+        Assert.assertEquals(c.moneyPerPlayerCard.get(playerCard).getAmountInCents(), 200);
+    }
+
 
     @Test
     public void addAmount_Negative_MoneyAmount_Should_Not_Add_The_Amount_Test(){
