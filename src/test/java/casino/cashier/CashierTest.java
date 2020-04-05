@@ -6,17 +6,11 @@ import bettingauthoritiyAPI.BettingAuthority;
 import bettingauthoritiyAPI.IBetLoggingAuthority;
 import casino.bet.Bet;
 import casino.bet.MoneyAmount;
-import casino.idbuilder.ids.BetID;
-import casino.idbuilder.ids.CardID;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 
 public class CashierTest {
