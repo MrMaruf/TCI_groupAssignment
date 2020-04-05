@@ -45,4 +45,33 @@ public class GamingMachineTest {
         verify(this.cashier).addAmount(gm.playerCard, won);
         Assert.assertNull(gm.currentBet);
     }
+
+
+    @Test
+    public void connectCard_Should_Set_An_IPlayerCard_To_The_GameMachine_Test() {
+        // arrange
+        GamingMachine gm = new GamingMachine(this.game, this.cashier);
+        IPlayerCard cardToConnect = mock(IPlayerCard.class);
+
+        // act
+        gm.connectCard(cardToConnect);
+
+        // assert
+        Assert.assertEquals(gm.playerCard, cardToConnect);
+    }
+
+    @Test
+    public void placeBet_With_Valid_MoneyAmount_Should_Create_Bet_From_Card_With_MoneyAmount_Pass_It_To_Game_And_Return_True_Test() {
+        // arrange
+        GamingMachine gm = new GamingMachine(this.game, this.cashier);
+        // connect card
+        long moneyToBet = 200;
+        boolean betIsValid = false;
+
+        // act
+        betIsValid = gm.placeBet(moneyToBet);
+
+        // assert
+        Assert.assertNotNull(gm.currentBet);
+    }
 }
