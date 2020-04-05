@@ -36,6 +36,6 @@ public class GamingMachine implements IGamingMachine {
 
     @Override
     public void connectCard(IPlayerCard card) {
-
+        this.playerCard = card;
     }
 }
