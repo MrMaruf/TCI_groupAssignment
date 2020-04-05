@@ -163,8 +163,14 @@ public class Game implements IGame {
     @Override
     public void startBettingRound() {
         IBettingRound bettingRound1 = new BettingRound(new BetToken(new BettingRoundID()));
-        setBettingRound(new BettingRound(new BetToken(new BettingRoundID())));
-        bettingAuthority.getLoggingAuthority().startBettingRound(bettingRound1);
+        if(getBettingRound() == bettingRound1){
+            throw new IllegalArgumentException("the betting round has already started");
+        }else{
+            setBettingRound(new BettingRound(new BetToken(new BettingRoundID())));
+            bettingAuthority.getLoggingAuthority().startBettingRound(bettingRound1);
+        }
+
+
     }
 
     @Override
