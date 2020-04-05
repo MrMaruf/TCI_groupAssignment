@@ -32,6 +32,8 @@ public class GamingMachineTest {
     public void acceptWinner_Should_Tell_Cashier_To_Transfer_MoneyAmount_To_The_Winner_Test() {
         // arrange
         GamingMachine gm = new GamingMachine(this.game, this.cashier);
+        // connect card to gamingmachine
+        // place the winning bet
         BetResult winningBet = mock(BetResult.class);
         MoneyAmount won = new MoneyAmount(100);
         when(winningBet.getAmountWon()).thenReturn(won);
