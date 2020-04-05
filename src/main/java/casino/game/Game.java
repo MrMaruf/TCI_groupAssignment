@@ -164,7 +164,6 @@ public class Game implements IGame {
     public void startBettingRound() {
         IBettingRound bettingRound1 = new BettingRound(new BetToken(new BettingRoundID()));
         setBettingRound(new BettingRound(new BetToken(new BettingRoundID())));
-
         bettingAuthority.getLoggingAuthority().startBettingRound(bettingRound1);
     }
 
