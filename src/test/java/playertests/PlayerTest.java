@@ -65,10 +65,10 @@ public class PlayerTest {
         //act
         doNothing().when(casino).addGame("game", game);
         if(game != null) {
-            if(casino.getGame("game") != null) {
-                //when(casino.getGame("game")).thenReturn(game);
+
+                when(casino.getGame("game")).thenReturn(game);
                 when(game.acceptBet(bet,gameMachine)).thenReturn(true);
-            }
+
         }
 
 
