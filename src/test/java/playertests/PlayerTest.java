@@ -79,10 +79,30 @@ public class PlayerTest {
         Assert.assertNotNull(gamingMachine.getPlayerCard());
         verify(gamingMachine, times(1)).placeBet(l);
 
+    }
 
+    @Test
+    public void Player_playOnGameMachine_Should_Allow_User_To_Connect_His_Card(){
+        ICasino casino = mock(ICasino.class);
+        IPlayer sut = new Player(casino);
+        IPlayerCard card = mock(IPlayerCard.class);
+        GamingMachine gamingMachine = mock(GamingMachine.class);
+        IPlayerCard anothrcard = mock(IPlayerCard.class);
 
+        sut.addPlayerCard(card);
+        gamingMachine.connectCard(anothrcard);
+        if(sut.getAllPlayerCards().contains(card)){
+            if(gamingMachine.getPlayerCard() != card){
+                gamingMachine.connectCard(card);
+                when(gamingMachine.getPlayerCard()).thenReturn(card);
+                sut.playOnGameMachine(card, gamingMachine);
+            }
 
+        }
 
+        //assert
+       // Assert.assertNotNull(gamingMachine.getPlayerCard());
+        verify(gamingMachine, times(1)).connectCard(card);
 
 
     }
