@@ -19,7 +19,13 @@ public class Player implements IPlayer {
 
     @Override
     public void addPlayerCard(IPlayerCard playerCard) {
-        playerCards.add(playerCard);
+        if(playerCards.contains(playerCard)){
+            throw new IllegalArgumentException("the player card already exists");
+        }
+        else{
+            playerCards.add(playerCard);
+        }
+
     }
 
     @Override
