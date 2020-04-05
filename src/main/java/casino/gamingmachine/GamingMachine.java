@@ -2,9 +2,11 @@ package casino.gamingmachine;
 
 import casino.bet.Bet;
 import casino.bet.BetResult;
+import casino.bet.MoneyAmount;
 import casino.cashier.ICashier;
 import casino.cashier.IPlayerCard;
 import casino.game.IGame;
+import casino.idbuilder.ids.BetID;
 import casino.idbuilder.ids.GamingMachineID;
 
 public class GamingMachine implements IGamingMachine {
@@ -21,7 +23,10 @@ public class GamingMachine implements IGamingMachine {
 
     @Override
     public boolean placeBet(long amountInCents) {
-        return false;
+        BetID betID = this.playerCard.generateNewBetID();
+        Bet bet = new Bet(betID, new MoneyAmount(amountInCents));
+        this.currentBet = bet;
+        return this.game.acceptBet(bet, this);
     }
 
     @Override

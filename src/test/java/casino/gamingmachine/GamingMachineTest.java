@@ -2,6 +2,7 @@ package casino.gamingmachine;
 
 import bettingauthoritiyAPI.BettingAuthority;
 import bettingauthoritiyAPI.IBetLoggingAuthority;
+import casino.bet.Bet;
 import casino.bet.BetResult;
 import casino.bet.MoneyAmount;
 import casino.cashier.Cashier;
@@ -64,16 +65,17 @@ public class GamingMachineTest {
     @Test
     public void placeBet_With_Valid_MoneyAmount_Should_Create_Bet_From_Card_With_MoneyAmount_Pass_It_To_Game_And_Return_True_Test() {
         // arrange
+        when(this.game.acceptBet(any(Bet.class), any(IGamingMachine.class))).thenReturn(true);
         GamingMachine gm = new GamingMachine(this.game, this.cashier);
         gm.connectCard(this.cardToConnect);
-        long moneyToBet = 200;
         boolean betIsValid = false;
 
         // act
-        betIsValid = gm.placeBet(moneyToBet);
+        betIsValid = gm.placeBet(200);
 
         // assert
         Assert.assertNotNull(gm.currentBet);
         Assert.assertTrue(betIsValid);
+        verify(this.game).acceptBet(gm.currentBet, gm);
     }
 }
