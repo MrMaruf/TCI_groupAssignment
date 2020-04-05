@@ -11,7 +11,7 @@ public interface IPlayer {
 
     public void removePlayerCard(IPlayerCard playerCard);
 
-    public void playOnGameMachine(IPlayerCard playerCard, IGamingMachine gamingMachine);
+    public void playOnGameMachine(IPlayerCard playerCard, GamingMachine gamingMachine);
 
     public List<IPlayerCard> getAllPlayerCards();
 
