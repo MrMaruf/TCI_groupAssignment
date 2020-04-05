@@ -32,25 +32,6 @@ public class GamingMachineTest {
     }
 
     @Test
-    public void acceptWinner_Should_Tell_Cashier_To_Transfer_MoneyAmount_To_The_Winner_Test() {
-        // arrange
-        GamingMachine gm = new GamingMachine(this.game, this.cashier);
-        // connect card to gamingmachine
-        // place the winning bet
-        BetResult winningBet = mock(BetResult.class);
-        MoneyAmount won = new MoneyAmount(100);
-        when(winningBet.getAmountWon()).thenReturn(won);
-
-        // act
-        gm.acceptWinner(winningBet);
-
-        // assert
-        verify(this.cashier).addAmount(gm.playerCard, won);
-        Assert.assertNull(gm.currentBet);
-    }
-
-
-    @Test
     public void connectCard_Should_Set_An_IPlayerCard_To_The_GameMachine_Test() {
         // arrange
         GamingMachine gm = new GamingMachine(this.game, this.cashier);
@@ -78,4 +59,22 @@ public class GamingMachineTest {
         Assert.assertTrue(betIsValid);
         verify(this.game).acceptBet(gm.currentBet, gm);
     }
+
+    @Test
+    public void acceptWinner_Should_Tell_Cashier_To_Transfer_MoneyAmount_To_The_Winner_Test() {
+        // arrange
+        GamingMachine gm = new GamingMachine(this.game, this.cashier);
+        gm.connectCard(this.cardToConnect);
+        gm.placeBet(100);
+        BetResult winningBet = mock(BetResult.class);
+        when(winningBet.getAmountWon()).thenReturn(gm.currentBet.getMoneyAmount());
+
+        // act
+        gm.acceptWinner(winningBet);
+
+        // assert
+        verify(this.cashier).addAmount(gm.playerCard, gm.currentBet.getMoneyAmount());
+        Assert.assertNull(gm.currentBet);
+    }
+
 }
