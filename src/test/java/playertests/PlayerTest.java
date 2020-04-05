@@ -64,10 +64,13 @@ public class PlayerTest {
 
         //act
         doNothing().when(casino).addGamingMachine(gameMachine);
-        doNothing().when(gameMachine).setGame(game);
-        when(gameMachine.getGame("name")).thenReturn(game);
-        if(game != null){
-            when(game.acceptBet(bet,gameMachine)).thenReturn(true);
+        when(casino.getGamingMachine(gameMachine)).thenReturn(gameMachine);
+        if(gameMachine != null){
+            doNothing().when(gameMachine).setGame(game);
+            when(gameMachine.getGame("name")).thenReturn(game);
+            if(game != null){
+                when(game.acceptBet(bet,gameMachine)).thenReturn(true);
+            }
         }
 
 
