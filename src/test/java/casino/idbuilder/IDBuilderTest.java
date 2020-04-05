@@ -1,4 +1,5 @@
-import casino.idbuilder.IDBuilder;
+package casino.idbuilder;
+
 import casino.idbuilder.ids.*;
 import org.junit.Assert;
 import org.junit.Test;
