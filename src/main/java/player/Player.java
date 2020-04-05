@@ -14,7 +14,7 @@ public class Player implements IPlayer {
     private ICasino casino;
 
     public Player(ICasino casino) {
-
+        this.casino = casino;
     }
 
     @Override
@@ -50,7 +50,8 @@ public class Player implements IPlayer {
     }
 
     @Override
-    public void betOnMachine(IGamingMachine gamingMachine, IPlayerCard iPlayerCard) {
-
+    public void betOnMachine(IGamingMachine gamingMachine, IPlayerCard iPlayerCard, long amount) {
+        gamingMachine.connectCard(iPlayerCard);
+        gamingMachine.placeBet(amount);
     }
 }

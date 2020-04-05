@@ -10,6 +10,7 @@ import casino.game.Game;
 import casino.game.IBettingRound;
 import casino.game.IGame;
 import casino.game.IGameRule;
+import casino.gamingmachine.GamingMachine;
 import casino.gamingmachine.IGamingMachine;
 import org.junit.Test;
 import org.junit.Assert;
@@ -59,7 +60,7 @@ public class PlayerTest {
         ICasino casino = mock(ICasino.class);
         IPlayer sut = new Player(casino);
         IPlayerCard card = mock(IPlayerCard.class);
-        IGamingMachine gamingMachine = mock(IGamingMachine.class);
+        GamingMachine gamingMachine = mock(GamingMachine.class);
 
         long l = 10;
 
@@ -67,6 +68,7 @@ public class PlayerTest {
         sut.addPlayerCard(card);
         if(sut.getAllPlayerCards().contains(card)){
             gamingMachine.connectCard(card);
+            when(gamingMachine.getPlayerCard()).thenReturn(card);
             if(gamingMachine.getPlayerCard() != null) {
                 when(gamingMachine.placeBet(l)).thenReturn(true);
                 sut.betOnMachine(gamingMachine, card, l);
@@ -74,6 +76,7 @@ public class PlayerTest {
         }
 
         //assert
+        Assert.assertNotNull(gamingMachine.getPlayerCard());
         verify(gamingMachine, times(1)).placeBet(l);
 
 

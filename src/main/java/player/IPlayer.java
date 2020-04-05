@@ -14,7 +14,7 @@ public interface IPlayer {
 
     public List<IPlayerCard> getAllPlayerCards();
 
-    public void betOnMachine(IGamingMachine gamingMachine, IPlayerCard iPlayerCard);
+    public void betOnMachine(IGamingMachine gamingMachine, IPlayerCard iPlayerCard, long amount);
 
 
 }
