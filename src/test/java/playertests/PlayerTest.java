@@ -3,6 +3,7 @@ import ID.BettingRoundID;
 import bettingauthoritiyAPI.*;
 import casino.ICasino;
 import casino.bet.Bet;
+import casino.cashier.ICashier;
 import casino.cashier.IPlayerCard;
 import casino.cashier.PlayerCard;
 import casino.game.Game;
@@ -53,33 +54,35 @@ public class PlayerTest {
     }
 
     @Test
-    public void Player_betOnMachine_Should_Place_Bet_On_A_Game_Test(){
+    public void Player_betOnMAchine_Should_Allow_Player_To_place_Bet_On_Gaming_Machine_Test(){
         //arrange
         ICasino casino = mock(ICasino.class);
         IPlayer sut = new Player(casino);
-        IPlayerCard card = mock(PlayerCard.class);
-        IGame game = mock(Game.class);
-        IGamingMachine gameMachine = mock(IGamingMachine.class);
-        Bet bet = mock(Bet.class);
+        IPlayerCard card = mock(IPlayerCard.class);
+        IGamingMachine gamingMachine = mock(IGamingMachine.class);
+
+        long l = 10;
 
         //act
-        doNothing().when(casino).addGame("game", game);
-        if(game != null) {
-
-                when(casino.getGame("game")).thenReturn(game);
-                when(game.acceptBet(bet,gameMachine)).thenReturn(true);
-
+        sut.addPlayerCard(card);
+        if(sut.getAllPlayerCards().contains(card)){
+            gamingMachine.connectCard(card);
+            if(gamingMachine.getPlayerCard() != null) {
+                when(gamingMachine.placeBet(l)).thenReturn(true);
+                sut.betOnMachine(gamingMachine, card, l);
+            }
         }
 
+        //assert
+        verify(gamingMachine, times(1)).placeBet(l);
 
 
-        sut.betOnMachine(gameMachine, card);
 
-        //arrange
 
-        verify(game).acceptBet(bet, gameMachine);
-        Assert.assertTrue(game.acceptBet(bet, gameMachine));
+
 
 
     }
+
+
 }
