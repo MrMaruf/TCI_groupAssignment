@@ -21,11 +21,13 @@ import static org.mockito.Mockito.*;
 public class GamingMachineTest {
     IGame game;
     ICashier cashier;
+    IPlayerCard cardToConnect;
 
     @Before
     public void setUp(){
         this.game = mock(IGame.class);
         this.cashier = mock(ICashier.class);
+        this.cardToConnect = mock(IPlayerCard.class);
     }
 
     @Test
@@ -51,10 +53,9 @@ public class GamingMachineTest {
     public void connectCard_Should_Set_An_IPlayerCard_To_The_GameMachine_Test() {
         // arrange
         GamingMachine gm = new GamingMachine(this.game, this.cashier);
-        IPlayerCard cardToConnect = mock(IPlayerCard.class);
 
         // act
-        gm.connectCard(cardToConnect);
+        gm.connectCard(this.cardToConnect);
 
         // assert
         Assert.assertEquals(gm.playerCard, cardToConnect);
@@ -64,7 +65,7 @@ public class GamingMachineTest {
     public void placeBet_With_Valid_MoneyAmount_Should_Create_Bet_From_Card_With_MoneyAmount_Pass_It_To_Game_And_Return_True_Test() {
         // arrange
         GamingMachine gm = new GamingMachine(this.game, this.cashier);
-        // connect card
+        gm.connectCard(this.cardToConnect);
         long moneyToBet = 200;
         boolean betIsValid = false;
 
@@ -73,5 +74,6 @@ public class GamingMachineTest {
 
         // assert
         Assert.assertNotNull(gm.currentBet);
+        Assert.assertTrue(betIsValid);
     }
 }
