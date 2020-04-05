@@ -2,15 +2,21 @@ package playertests;
 import ID.BettingRoundID;
 import bettingauthoritiyAPI.*;
 import casino.ICasino;
+import casino.bet.Bet;
 import casino.cashier.IPlayerCard;
 import casino.cashier.PlayerCard;
 import casino.game.Game;
 import casino.game.IBettingRound;
+import casino.game.IGame;
 import casino.game.IGameRule;
+import casino.gamingmachine.IGamingMachine;
 import org.junit.Test;
 import org.junit.Assert;
 import player.IPlayer;
 import player.Player;
+
+import java.util.AbstractList;
+import java.util.List;
 
 import static org.mockito.Mockito.*;
 public class PlayerTest {
@@ -37,11 +43,41 @@ public class PlayerTest {
         IPlayer sut = new Player(casino);
         IPlayerCard card = mock(PlayerCard.class);
 
+
         //act
         sut.addPlayerCard(card);
         sut.removePlayerCard(card);
 
         //assert
         Assert.assertEquals(0, sut.getAllPlayerCards().size() );
+    }
+
+    @Test
+    public void Player_betOnMachine_Should_Place_Bet_On_A_Game_Test(){
+        //arrange
+        ICasino casino = mock(ICasino.class);
+        IPlayer sut = new Player(casino);
+        IPlayerCard card = mock(PlayerCard.class);
+        IGame game = mock(Game.class);
+        IGamingMachine gameMachine = mock(IGamingMachine.class);
+        Bet bet = mock(Bet.class);
+
+        //act
+        doNothing().when(casino).addGamingMachine(gameMachine);
+        doNothing().when(gameMachine).setGame(game);
+        when(gameMachine.getGame("name")).thenReturn(game);
+        if(game != null){
+            when(game.acceptBet(bet,gameMachine)).thenReturn(true);
+        }
+
+
+        sut.betOnMachine(gameMachine, card);
+
+        //arrange
+        verify(gameMachine, times(1)).getGame(anyString());
+        verify(game).acceptBet(bet, gameMachine);
+        Assert.assertTrue(game.acceptBet(bet, gameMachine));
+
+
     }
 }
