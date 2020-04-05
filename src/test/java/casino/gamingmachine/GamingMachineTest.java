@@ -41,6 +41,6 @@ public class GamingMachineTest {
 
         // assert
         verify(this.cashier).addAmount(gm.playerCard, won);
-        Assert.assertNull(gm.bet);
+        Assert.assertNull(gm.currentBet);
     }
 }
