@@ -41,8 +41,9 @@ public class Player implements IPlayer {
     }
 
     @Override
-    public void playOnGameMachine(IPlayerCard playerCard, IGamingMachine gamingMachine) {
-
+    public void playOnGameMachine(IPlayerCard playerCard, GamingMachine gamingMachine) {
+        
+        gamingMachine.connectCard(playerCard);
     }
 
     @Override
