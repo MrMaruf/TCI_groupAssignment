@@ -88,11 +88,32 @@ public class CashierTest {
         Cashier c = new Cashier(this.cards, this.betAuth);
         IPlayerCard playerCard = c.distributeGamblerCard();
         when(playerCard.returnBetIDsAndClearCard()).thenReturn(null);
+
         // act
         c.returnGamblerCard(playerCard);
 
         // assert
         verify(this.bl).handInGamblingCard(playerCard.getCardID(), null);
         Assert.assertNull(c.moneyPerPlayerCard.get(playerCard));
+    }
+
+
+
+    @Test
+    public void checkIfBetIsValid_Negative_MoneyAmount_Should_Return_False_Test(){
+        // arrange
+        Cashier c = new Cashier(this.cards, this.betAuth);
+        IPlayerCard playerCard = c.distributeGamblerCard();
+        c.addAmount(playerCard, new MoneyAmount(200));
+        Bet validBet = mock(Bet.class);
+        when(validBet.getMoneyAmount()).thenReturn(new MoneyAmount(-50));
+        boolean isBetValid = false;
+
+        // act
+        isBetValid = c.checkIfBetIsValid(playerCard, validBet);
+
+        // assert
+        Assert.assertFalse(isBetValid);
+        Assert.assertEquals(c.moneyPerPlayerCard.get(playerCard).getAmountInCents(), 200);
     }
 }
