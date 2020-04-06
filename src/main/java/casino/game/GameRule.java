@@ -17,6 +17,9 @@ public class GameRule implements IGameRule {
 
     @Override
     public BetResult determineWinner(Integer randomWinValue, Set<Bet> bets) {
+        if(bets.size() == 0){
+            return null;
+        }
         List<Bet> allBets = new ArrayList<>(bets);
         Bet winner = allBets.get(randomWinValue % allBets.size());
         MoneyAmount amountWon = null;
