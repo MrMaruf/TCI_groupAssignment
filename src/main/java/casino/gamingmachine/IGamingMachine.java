@@ -1,6 +1,6 @@
 package casino.gamingmachine;
 
-import ID.GamingMachineID;
+import casino.idbuilder.ids.GamingMachineID;
 import casino.bet.BetResult;
 import casino.cashier.IPlayerCard;
 
@@ -10,7 +10,7 @@ public interface IGamingMachine {
      * @param amountInCents
      * @return
      */
-    boolean placeBet(long amountInCents);// throws NoPlayerCardException;
+    boolean placeBet(long amountInCents) throws NoPlayerCardException;
 
     /**
      * Accept the BetResult from the winner. clear all open bets on this machine.

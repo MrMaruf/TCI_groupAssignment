@@ -1,9 +1,9 @@
 package bettingauthoritiyAPI;
 
-import ID.BetID;
-import ID.BettingRoundID;
-import ID.GamingMachineID;
-import ID.GeneralID;
+import casino.idbuilder.ids.BetID;
+import casino.idbuilder.ids.BettingRoundID;
+import casino.idbuilder.ids.GamingMachineID;
+import casino.idbuilder.ids.GeneralID;
 import casino.bet.Bet;
 import casino.bet.BetResult;
 import casino.game.IBettingRound;
