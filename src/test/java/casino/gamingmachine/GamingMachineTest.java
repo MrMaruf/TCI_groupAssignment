@@ -1,22 +1,14 @@
 package casino.gamingmachine;
 
-import bettingauthoritiyAPI.BettingAuthority;
-import bettingauthoritiyAPI.IBetLoggingAuthority;
 import casino.bet.Bet;
 import casino.bet.BetResult;
 import casino.bet.MoneyAmount;
-import casino.cashier.Cashier;
 import casino.cashier.ICashier;
 import casino.cashier.IPlayerCard;
 import casino.game.IGame;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.mockito.Mockito.*;
 
 public class GamingMachineTest {
@@ -66,15 +58,15 @@ public class GamingMachineTest {
         GamingMachine gm = new GamingMachine(this.game, this.cashier);
         gm.connectCard(this.cardToConnect);
         gm.placeBet(100);
-        BetResult winningBet = mock(BetResult.class);
-        when(winningBet.getAmountWon()).thenReturn(gm.currentBet.getMoneyAmount());
+        MoneyAmount winningAmount = new MoneyAmount(200);
+        BetResult winningBet = new BetResult(gm.currentBet, winningAmount);
 
         // act
         gm.acceptWinner(winningBet);
 
         // assert
-        verify(this.cashier).addAmount(gm.playerCard, gm.currentBet.getMoneyAmount());
         Assert.assertNull(gm.currentBet);
+        verify(this.cashier).addAmount(gm.playerCard, winningAmount);
     }
 
 }

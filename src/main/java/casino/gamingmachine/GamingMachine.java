@@ -9,6 +9,8 @@ import casino.game.IGame;
 import casino.idbuilder.ids.BetID;
 import casino.idbuilder.ids.GamingMachineID;
 
+import java.util.Set;
+
 public class GamingMachine implements IGamingMachine {
     IGame game;
     ICashier cashier;
@@ -31,7 +33,13 @@ public class GamingMachine implements IGamingMachine {
 
     @Override
     public void acceptWinner(BetResult winResult) {
-
+        for(BetID betID: this.playerCard.returnBetIDs()){
+            if(betID == winResult.getWinningBet().getBetID()){
+                this.cashier.addAmount(this.playerCard, winResult.getAmountWon());
+                this.currentBet = null;
+                return;
+            }
+        }
     }
 
     @Override
