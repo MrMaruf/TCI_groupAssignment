@@ -1,6 +1,5 @@
 package gametests;
 
-import ID.BetID;
 import bettingauthoritiyAPI.*;
 import casino.bet.Bet;
 import casino.bet.BetResult;
@@ -89,5 +88,41 @@ public class GameTest {
 
         Assert.assertEquals(bet, finalBet.getWinningBet());
 
+    }
+
+    @Test
+    public void Game_isBettingFinished_Should_Return_ValueOf_property_same_name_Test(){
+        IGameRule gameRule = mock(IGameRule.class);
+        BettingAuthority bettingAuthority = new BettingAuthority();
+        Game sut = new Game(gameRule, bettingAuthority);
+
+        sut.setIsBettingFinished(true);
+
+        Assert.assertEquals(sut.isBettingRoundFinished(), true);
+    }
+    @Test
+    public void Game_acceptBet_Should_Pass_Bet_To_BettingRound_Log_Info_Test(){
+        //arrange
+        GamingMachine gm = mock(GamingMachine.class);
+        IGameRule gameRule = mock(IGameRule.class);
+        BettingAuthority bettingAuthority = new BettingAuthority();
+        BetToken token = mock(BetToken.class);
+        Game sut = new Game(gameRule, bettingAuthority);
+        BettingRound betRound = mock(BettingRound.class);
+        Bet bet = mock(Bet.class);
+
+        //act
+        if(sut.isBettingRoundFinished()){
+            when(betRound.placeBet(bet)).thenReturn(true);
+            when(betRound.numberOFBetsMade()).thenReturn(1);
+
+            sut.bettingAuthority.getLoggingAuthority().addAcceptedBet(bet, betRound.getBettingRoundID(), gm.getGamingMachineID());
+        }
+
+        sut.acceptBet(bet, gm);
+
+        verify(betRound).placeBet(bet);
+        verify(betRound).numberOFBetsMade();
+        Assert.assertEquals(true, (sut.acceptBet(bet, gm)));
     }
 }
