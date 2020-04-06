@@ -1,5 +1,4 @@
 package casino.gamingmachine;
-
 import casino.bet.Bet;
 import casino.bet.BetResult;
 import casino.bet.MoneyAmount;
@@ -8,6 +7,7 @@ import casino.cashier.IPlayerCard;
 import casino.game.IGame;
 import casino.idbuilder.ids.BetID;
 import casino.idbuilder.ids.GamingMachineID;
+import player.IPlayer;
 
 import java.util.Set;
 
@@ -23,6 +23,9 @@ public class GamingMachine implements IGamingMachine {
         this.cashier = cashier;
     }
 
+    public IPlayerCard getPlayerCard(){
+        return this.playerCard;
+    }
     @Override
     public boolean placeBet(long amountInCents) throws NoPlayerCardException {
         if(this.playerCard == null){
