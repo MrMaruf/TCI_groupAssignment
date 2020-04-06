@@ -21,3 +21,7 @@ This folder contains documents related to this project, including class diagrams
 ## Documentation
 All of the diagrams were collected and merged into one pdf file which you may find in the documentation folder. There are also pictures of the diagrams one by one in the same folder.
 Also, to see the diagrams in their original view you may follow the [link](https://drive.google.com/open?id=1L2DMYr91eaR1qHxDGplEA101u_wNoymi).
+### Tests behaviour overview
+Link : 
+https://docs.google.com/document/d/1jTXQ7-1pqnT_3AJGV46vkaH7YL-wCbyB6WMPiRFq4qU/edit?usp=sharing
+
