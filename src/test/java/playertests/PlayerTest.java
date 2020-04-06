@@ -1,5 +1,4 @@
 package playertests;
-import ID.BettingRoundID;
 import bettingauthoritiyAPI.*;
 import casino.ICasino;
 import casino.bet.Bet;
@@ -12,11 +11,12 @@ import casino.game.IGame;
 import casino.game.IGameRule;
 import casino.gamingmachine.GamingMachine;
 import casino.gamingmachine.IGamingMachine;
+import casino.gamingmachine.NoPlayerCardException;
 import org.junit.Test;
 import org.junit.Assert;
 import player.IPlayer;
 import player.Player;
-
+import casino.idbuilder.ids.BettingRoundID;
 import java.util.AbstractList;
 import java.util.List;
 
@@ -55,7 +55,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void Player_betOnMAchine_Should_Allow_Player_To_place_Bet_On_Gaming_Machine_Test(){
+    public void Player_betOnMAchine_Should_Allow_Player_To_place_Bet_On_Gaming_Machine_Test() throws NoPlayerCardException {
         //arrange
         ICasino casino = mock(ICasino.class);
         IPlayer sut = new Player(casino);

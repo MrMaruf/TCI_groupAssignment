@@ -1,6 +1,6 @@
 package gametests;
 
-import ID.BettingRoundID;
+import casino.idbuilder.ids.BettingRoundID;
 import bettingauthoritiyAPI.*;
 import casino.bet.Bet;
 import casino.bet.BetResult;
@@ -151,6 +151,7 @@ public class GameTest {
             when(betRound.placeBet(bet)).thenReturn(true);
             sut.bettingAuthority.getLoggingAuthority().addAcceptedBet(bet, betRound.getBettingRoundID(), gm.getGamingMachineID());
             sut.acceptBet(bet, gm);
+
 
         }
     }

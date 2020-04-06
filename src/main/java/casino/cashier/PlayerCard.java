@@ -1,7 +1,7 @@
 package casino.cashier;
 
-import ID.BetID;
-import ID.CardID;
+import casino.idbuilder.ids.BetID;
+import casino.idbuilder.ids.CardID;
 
 import java.util.Set;
 

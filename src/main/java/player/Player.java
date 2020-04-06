@@ -5,6 +5,7 @@ import casino.cashier.IPlayerCard;
 import casino.cashier.PlayerCard;
 import casino.gamingmachine.GamingMachine;
 import casino.gamingmachine.IGamingMachine;
+import casino.gamingmachine.NoPlayerCardException;
 
 import java.util.*;
 
@@ -53,7 +54,7 @@ public class Player implements IPlayer {
     }
 
     @Override
-    public void betOnMachine(GamingMachine gamingMachine, IPlayerCard iPlayerCard, long amount) {
+    public void betOnMachine(GamingMachine gamingMachine, IPlayerCard iPlayerCard, long amount) throws NoPlayerCardException {
         if(gamingMachine.getPlayerCard() == iPlayerCard){
             gamingMachine.placeBet(amount);
         }else{

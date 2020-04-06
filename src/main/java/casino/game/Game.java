@@ -1,6 +1,8 @@
 package casino.game;
 
-import ID.BettingRoundID;
+import casino.idbuilder.ids.BetID;
+import casino.idbuilder.ids.CardID;
+import casino.idbuilder.ids.BettingRoundID;
 import bettingauthoritiyAPI.BetToken;
 import bettingauthoritiyAPI.BettingAuthority;
 import casino.bet.Bet;
