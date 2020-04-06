@@ -23,6 +23,7 @@ public class GamingMachineTest {
 
     @Before
     public void setUp(){
+        // mocking
         this.game = mock(IGame.class);
         this.cashier = mock(ICashier.class);
         this.cardToConnect = mock(IPlayerCard.class);
@@ -47,7 +48,7 @@ public class GamingMachineTest {
         // arrange
         GamingMachine gm = new GamingMachine(this.game, this.cashier);
         gm.connectCard(this.cardToConnect);
-        boolean betIsValid = false;
+        boolean betIsValid;
 
         // act
         betIsValid = gm.placeBet(200);
@@ -66,9 +67,10 @@ public class GamingMachineTest {
         gm.placeBet(100);
         Set<BetID> allPlayerCardBetIDs = new HashSet<>();
         allPlayerCardBetIDs.add(gm.currentBet.getBetID());
-        when(this.cardToConnect.returnBetIDs()).thenReturn(allPlayerCardBetIDs);
         MoneyAmount winningAmount = new MoneyAmount(200);
         BetResult winningBet = new BetResult(gm.currentBet, winningAmount);
+        // mocking
+        when(this.cardToConnect.returnBetIDs()).thenReturn(allPlayerCardBetIDs);
 
         // act
         gm.acceptWinner(winningBet);
@@ -81,10 +83,11 @@ public class GamingMachineTest {
     @Test
     public void placeBet_With_Amount_PlayerCard_Doesnt_Have_Should_Return_False() throws NoPlayerCardException{
         // arrange
-        when(this.cashier.checkIfBetIsValid(any(IPlayerCard.class), any(Bet.class))).thenReturn(false);
         GamingMachine gm = new GamingMachine(this.game, this.cashier);
         gm.connectCard(this.cardToConnect);
-        boolean betIsValid = false;
+        boolean betIsValid;
+        // mocking
+        when(this.cashier.checkIfBetIsValid(any(IPlayerCard.class), any(Bet.class))).thenReturn(false);
 
         // act
         betIsValid = gm.placeBet(200);
@@ -100,8 +103,8 @@ public class GamingMachineTest {
         // arrange
         GamingMachine gm = new GamingMachine(this.game, this.cashier);
         gm.connectCard(this.cardToConnect);
-        boolean firstBetIsValid = false;
-        boolean secondBetIsValid = false;
+        boolean firstBetIsValid;
+        boolean secondBetIsValid;
 
         // act
         firstBetIsValid = gm.placeBet(200);

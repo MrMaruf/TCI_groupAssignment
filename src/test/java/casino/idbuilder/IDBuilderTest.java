@@ -8,7 +8,7 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 public class IDBuilderTest {
     @Test
     public void getCardID_Should_Return_CardID_Object_Test(){
-        // act
+        // assign and act
         CardID cardID = IDBuilder.getCardID();
 
         // assert
@@ -17,7 +17,7 @@ public class IDBuilderTest {
 
     @Test
     public void getGamingMachineID_Should_Return_GameMachineID_Object_Test(){
-        // act
+        // assign and act
         GamingMachineID gameMachineID = IDBuilder.getGamingMachineID();
 
         // assert
@@ -26,7 +26,7 @@ public class IDBuilderTest {
 
     @Test
     public void getBetID_Should_Return_BetID_Object_Test(){
-        // act
+        // assign and act
         BetID betID = IDBuilder.getBetID();
 
         // assert
@@ -35,7 +35,7 @@ public class IDBuilderTest {
 
     @Test
     public void getBettingRoundID_Should_Return_BettingRoundID_Object_Test(){
-        // act
+        // assign and act
         BettingRoundID bettingRoundID = IDBuilder.getBettingRoundID();
 
         // assert
@@ -44,7 +44,7 @@ public class IDBuilderTest {
 
     @Test
     public void getGameID_Should_Return_GameID_Object_Test(){
-        // act
+        // assign and act
         GameID gameID = IDBuilder.getGameID();
 
         // assert

@@ -20,6 +20,7 @@ public class CashierTest {
 
     @Before
     public void setUp(){
+        // mocking
         this.bl = mock(IBetLoggingAuthority.class);
         this.betAuth = mock(BettingAuthority.class);
         this.cards = new ArrayList<>();
@@ -64,9 +65,10 @@ public class CashierTest {
         Cashier c = new Cashier(this.cards, this.betAuth);
         IPlayerCard playerCard = c.distributeGamblerCard();
         c.addAmount(playerCard, new MoneyAmount(200));
+        boolean isBetValid;
+        // mocking
         Bet validBet = mock(Bet.class);
         when(validBet.getMoneyAmount()).thenReturn(new MoneyAmount(50));
-        boolean isBetValid = false;
 
         // act
         isBetValid = c.checkIfBetIsValid(playerCard, validBet);
@@ -81,6 +83,7 @@ public class CashierTest {
         // arrange
         Cashier c = new Cashier(this.cards, this.betAuth);
         IPlayerCard playerCard = c.distributeGamblerCard();
+        // mocking
         when(playerCard.returnBetIDsAndClearCard()).thenReturn(null);
 
         // act
@@ -99,9 +102,10 @@ public class CashierTest {
         Cashier c = new Cashier(this.cards, this.betAuth);
         IPlayerCard playerCard = c.distributeGamblerCard();
         c.addAmount(playerCard, new MoneyAmount(200));
+        boolean isBetValid;
+        // mocking
         Bet validBet = mock(Bet.class);
         when(validBet.getMoneyAmount()).thenReturn(new MoneyAmount(-50));
-        boolean isBetValid = false;
 
         // act
         isBetValid = c.checkIfBetIsValid(playerCard, validBet);
@@ -117,9 +121,10 @@ public class CashierTest {
         Cashier c = new Cashier(this.cards, this.betAuth);
         IPlayerCard playerCard = c.distributeGamblerCard();
         c.addAmount(playerCard, new MoneyAmount(200));
+        boolean isBetValid;
+        // mocking
         Bet validBet = mock(Bet.class);
         when(validBet.getMoneyAmount()).thenReturn(new MoneyAmount(250));
-        boolean isBetValid = false;
 
         // act
         isBetValid = c.checkIfBetIsValid(playerCard, validBet);
