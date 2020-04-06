@@ -1,7 +1,5 @@
 package casino.cashier;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.mockito.Mockito.*;
 import bettingauthoritiyAPI.BettingAuthority;
 import bettingauthoritiyAPI.IBetLoggingAuthority;
 import casino.bet.Bet;
@@ -9,8 +7,12 @@ import casino.bet.MoneyAmount;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.mockito.Mockito.*;
 
 
 public class CashierTest {
