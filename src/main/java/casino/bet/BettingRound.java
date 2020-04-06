@@ -28,7 +28,7 @@ public class BettingRound implements IBettingRound {
 
     @Override
     public Set<Bet> getAllBetsMade() {
-        return null;
+        return (Set<Bet>) allBets;
     }
 
     @Override
