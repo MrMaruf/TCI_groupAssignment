@@ -43,7 +43,7 @@ public class GamingMachineTest {
     }
 
     @Test
-    public void placeBet_With_Valid_MoneyAmount_Should_Create_Bet_From_Card_With_MoneyAmount_Pass_It_To_Game_And_Return_True_Test() {
+    public void placeBet_With_Valid_MoneyAmount_Should_Create_Bet_From_Card_With_MoneyAmount_Pass_It_To_Game_And_Return_True_Test()  throws NoPlayerCardException{
         // arrange
         GamingMachine gm = new GamingMachine(this.game, this.cashier);
         gm.connectCard(this.cardToConnect);
@@ -59,7 +59,7 @@ public class GamingMachineTest {
     }
 
     @Test
-    public void acceptWinner_Should_Tell_Cashier_To_Transfer_MoneyAmount_To_The_Winner_Test() {
+    public void acceptWinner_Should_Tell_Cashier_To_Transfer_MoneyAmount_To_The_Winner_Test() throws NoPlayerCardException {
         // arrange
         GamingMachine gm = new GamingMachine(this.game, this.cashier);
         gm.connectCard(this.cardToConnect);
@@ -79,7 +79,7 @@ public class GamingMachineTest {
     }
 
     @Test
-    public void placeBet_With_Amount_PlayerCard_Doesnt_Have_Should_Return_False(){
+    public void placeBet_With_Amount_PlayerCard_Doesnt_Have_Should_Return_False() throws NoPlayerCardException{
         // arrange
         when(this.cashier.checkIfBetIsValid(any(IPlayerCard.class), any(Bet.class))).thenReturn(false);
         GamingMachine gm = new GamingMachine(this.game, this.cashier);
@@ -96,7 +96,7 @@ public class GamingMachineTest {
     }
 
     @Test
-    public void placeBet_Second_Time_On_Same_BettingRound_Should_Return_False(){
+    public void placeBet_Second_Time_On_Same_BettingRound_Should_Return_False() throws NoPlayerCardException{
         // arrange
         GamingMachine gm = new GamingMachine(this.game, this.cashier);
         gm.connectCard(this.cardToConnect);
@@ -115,18 +115,13 @@ public class GamingMachineTest {
     }
 
     @Test(expected = NoPlayerCardException.class)
-    public void placeBet_With_No_PlayerCards_On_Machine_Should_Raise_NoPlayerException_Test(){
+    public void placeBet_With_No_PlayerCards_On_Machine_Should_Raise_NoPlayerException_Test() throws NoPlayerCardException{
         // arrange
         GamingMachine gm = new GamingMachine(this.game, this.cashier);
         boolean betIsValid = false;
 
         // act
         betIsValid = gm.placeBet(200);
-
-        // assert
-        Assert.assertFalse(betIsValid);
-        Assert.assertNull(gm.currentBet);
-        verify(this.game, times(0)).acceptBet(gm.currentBet, gm);
     }
 
 }
