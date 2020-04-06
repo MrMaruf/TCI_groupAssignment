@@ -25,6 +25,9 @@ public class GamingMachine implements IGamingMachine {
 
     @Override
     public boolean placeBet(long amountInCents) {
+        if(this.currentBet != null){
+            return false;
+        }
         BetID betID = this.playerCard.generateNewBetID();
         Bet bet = new Bet(betID, new MoneyAmount(amountInCents));
         if(!this.cashier.checkIfBetIsValid(this.playerCard, bet)){
