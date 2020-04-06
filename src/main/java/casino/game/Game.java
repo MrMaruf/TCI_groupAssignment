@@ -4,6 +4,7 @@ import ID.BettingRoundID;
 import bettingauthoritiyAPI.BetToken;
 import bettingauthoritiyAPI.BettingAuthority;
 import casino.bet.Bet;
+import casino.bet.BetResult;
 import casino.bet.BettingRound;
 import casino.gamingmachine.IGamingMachine;
 
@@ -59,7 +60,20 @@ public class Game implements IGame {
 
     @Override
     public void determineWinner() {
+        if(isBettingRoundFinished() == false){
+            BetToken token = bettingAuthority.getTokenAuthority().getBetToken(bettingRound.getBettingRoundID());
+            setBettingRound(new BettingRound(token));
+            if(getBettingRound() == null){
 
+                Set<Bet> bets = bettingRound.getAllBetsMade();
+                BetResult betResult = gameRule.determineWinner(bettingAuthority.getTokenAuthority().getRandomInteger(bettingRound.getBetToken()), bets);
+
+                for(IGamingMachine gm: getGamingMachines()){
+                    gm.acceptWinner(betResult);
+                }
+            }
+
+        }
     }
 
     @Override
