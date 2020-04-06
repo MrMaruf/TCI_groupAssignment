@@ -24,7 +24,10 @@ public class GamingMachine implements IGamingMachine {
     }
 
     @Override
-    public boolean placeBet(long amountInCents) {
+    public boolean placeBet(long amountInCents) throws NoPlayerCardException {
+        if(this.playerCard == null){
+            throw new NoPlayerCardException();
+        }
         if(this.currentBet != null){
             return false;
         }
