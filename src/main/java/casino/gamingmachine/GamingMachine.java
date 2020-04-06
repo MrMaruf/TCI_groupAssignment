@@ -5,6 +5,7 @@ import casino.bet.MoneyAmount;
 import casino.cashier.ICashier;
 import casino.cashier.IPlayerCard;
 import casino.game.IGame;
+import casino.idbuilder.IDBuilder;
 import casino.idbuilder.ids.BetID;
 import casino.idbuilder.ids.GamingMachineID;
 import player.IPlayer;
@@ -16,13 +17,17 @@ public class GamingMachine implements IGamingMachine {
     ICashier cashier;
     protected Bet currentBet;
     protected IPlayerCard playerCard;
-
+    GamingMachineID gmID = IDBuilder.getGamingMachineID();
 
     public GamingMachine(IGame game, ICashier cashier){
         this.game = game;
         this.cashier = cashier;
     }
 
+    /**
+     * Is required for the player functionality and connected tests
+     * @return IPlayerCard
+     */
     public IPlayerCard getPlayerCard(){
         return this.playerCard;
     }
@@ -57,7 +62,7 @@ public class GamingMachine implements IGamingMachine {
 
     @Override
     public GamingMachineID getGamingMachineID() {
-        return null;
+        return gmID;
     }
 
     @Override
