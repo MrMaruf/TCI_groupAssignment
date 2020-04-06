@@ -12,7 +12,7 @@ import java.util.*;
 
 public class Game implements IGame {
     private IBettingRound bettingRound;
-
+    private boolean isBettingFinished;
     private List<IGamingMachine> gamingMachines;
 
     private IGameRule gameRule;
@@ -20,10 +20,14 @@ public class Game implements IGame {
 
     public BettingAuthority bettingAuthority;
 
+    public void setIsBettingFinished(boolean value){
+        this.isBettingFinished = value;
+    }
 
     public Game(IGameRule gameRule, BettingAuthority bettingAuthority){
         this.bettingAuthority = bettingAuthority;
         this.gameRule = gameRule;
+
         gamingMachines = new ArrayList<>();
 
     }
@@ -55,6 +59,17 @@ public class Game implements IGame {
 
     @Override
     public boolean acceptBet(Bet bet, IGamingMachine gamingMachine) {
+        IBettingRound bettingRound = new BettingRound(this.bettingAuthority.getTokenAuthority().getBetToken(new BettingRoundID()));
+        this.setIsBettingFinished(true);
+        if(isBettingRoundFinished()){
+            if(bettingRound.placeBet(bet)){
+                    this.bettingAuthority.getLoggingAuthority().addAcceptedBet(bet, bettingRound.getBettingRoundID(), gamingMachine.getGamingMachineID());
+                    return true;
+                }
+
+
+        }
+
         return false;
     }
 
@@ -78,6 +93,7 @@ public class Game implements IGame {
 
     @Override
     public boolean isBettingRoundFinished() {
-        return false;
+        return isBettingFinished;
     }
+
 }
