@@ -91,5 +91,7 @@ public class GamingMachineTest {
 
         // assert
         Assert.assertFalse(betIsValid);
+        Assert.assertNull(gm.currentBet);
+        verify(this.cashier).checkIfBetIsValid(eq(this.cardToConnect), any(Bet.class));
     }
 }

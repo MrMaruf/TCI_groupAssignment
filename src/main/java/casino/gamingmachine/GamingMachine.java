@@ -27,10 +27,10 @@ public class GamingMachine implements IGamingMachine {
     public boolean placeBet(long amountInCents) {
         BetID betID = this.playerCard.generateNewBetID();
         Bet bet = new Bet(betID, new MoneyAmount(amountInCents));
-        this.currentBet = bet;
         if(!this.cashier.checkIfBetIsValid(this.playerCard, bet)){
             return false;
         }
+        this.currentBet = bet;
         return this.game.acceptBet(bet, this);
     }
 
