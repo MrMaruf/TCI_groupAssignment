@@ -1,31 +1,22 @@
 package gametests;
 
 import ID.BetID;
-import ID.BettingRoundID;
 import bettingauthoritiyAPI.*;
-import casino.ICasino;
 import casino.bet.Bet;
 import casino.bet.BetResult;
 import casino.bet.BettingRound;
 import casino.bet.MoneyAmount;
-import casino.cashier.ICashier;
-import casino.cashier.IPlayerCard;
-import casino.cashier.PlayerCard;
 import casino.game.Game;
-import casino.game.IBettingRound;
-import casino.game.IGame;
 import casino.game.IGameRule;
 import casino.gamingmachine.GamingMachine;
 import casino.gamingmachine.IGamingMachine;
-import com.sun.tools.classfile.Opcode;
 import org.junit.Test;
 import org.junit.Assert;
-import player.IPlayer;
-import player.Player;
 
 import java.util.*;
 
 import static org.mockito.Mockito.*;
+
 
 public class GameTest {
     @Test
@@ -51,29 +42,34 @@ public class GameTest {
         IGameRule gameRule = mock(IGameRule.class);
         BettingAuthority bettingAuthority = new BettingAuthority();
         BetToken token = mock(BetToken.class);
+
         BettingRound betRound = mock(BettingRound.class);
         Game sut = new Game(gameRule, bettingAuthority);
         Bet bet = mock(Bet.class);
         Bet bet1 = mock(Bet.class);
-        int a = 0;
+        int a = 1;
         long i = 10;
         Set<Bet> bets = new HashSet<>();
 
         //act
 
         BetResult finalBet = new BetResult(bet, new MoneyAmount(i));
+        sut.setBettingRound(betRound);
         if(sut.isBettingRoundFinished() == false){
             bets.add(bet);
             bets.add(bet1);
+            sut.addGamingMachine(gm);
 
-            a = sut.bettingAuthority.getTokenAuthority().getRandomInteger(token);
+
+
+            sut.bettingAuthority.getTokenAuthority().getRandomInteger(token);
             when(betRound.getAllBetsMade()).thenReturn(bets);
             when(gameRule.getMaxBetsPerRound()).thenReturn(1);
-            when(gameRule.determineWinner(a, bets)).thenReturn(finalBet);
+            when(gameRule.determineWinner(gameRule.getMaxBetsPerRound(), betRound.getAllBetsMade())).thenReturn(finalBet);
 
-            foreach(GamingMachine gameMachine: sut.getGamingMachines()){
-                g.acceptWinner(finalBet);
-                gm.acceptWinner(finalBet);
+            for(IGamingMachine gameMachine: sut.getGamingMachines()){
+                gameMachine.acceptWinner(gameRule.determineWinner(gameRule.getMaxBetsPerRound(), betRound.getAllBetsMade()));
+
             }
 
 
@@ -83,11 +79,15 @@ public class GameTest {
 
 
         //assert
+        Assert.assertNotNull(a);
+        Assert.assertNotNull(bets);
+        //Assert.assertEquals(2, bets.size());
         verify(gm).acceptWinner(finalBet);
         verify(gameRule).determineWinner(a, bets);
-        verify(betRound.getAllBetsMade()).equals(bets);
-        verify(gameRule.getMaxBetsPerRound()).equals(1);
-        verify(finalBet).getWinningBet().equals(bet);
+
+        //verify(gameRule).getMaxBetsPerRound();
+
+        Assert.assertEquals(bet, finalBet.getWinningBet());
 
     }
 }
