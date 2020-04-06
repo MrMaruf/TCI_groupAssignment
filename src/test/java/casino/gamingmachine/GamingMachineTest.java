@@ -113,4 +113,20 @@ public class GamingMachineTest {
         Assert.assertNotNull(gm.currentBet);
         verify(this.game, times(1)).acceptBet(gm.currentBet, gm);
     }
+
+    @Test(expected = NoPlayerCardException.class)
+    public void placeBet_With_No_PlayerCards_On_Machine_Should_Raise_NoPlayerException_Test(){
+        // arrange
+        GamingMachine gm = new GamingMachine(this.game, this.cashier);
+        boolean betIsValid = false;
+
+        // act
+        betIsValid = gm.placeBet(200);
+
+        // assert
+        Assert.assertFalse(betIsValid);
+        Assert.assertNull(gm.currentBet);
+        verify(this.game, times(0)).acceptBet(gm.currentBet, gm);
+    }
+
 }
