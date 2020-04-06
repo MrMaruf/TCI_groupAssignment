@@ -6,9 +6,14 @@ import casino.bet.MoneyAmount;
 import casino.cashier.ICashier;
 import casino.cashier.IPlayerCard;
 import casino.game.IGame;
+import casino.idbuilder.ids.BetID;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.HashSet;
+import java.util.Set;
+
 import static org.mockito.Mockito.*;
 
 public class GamingMachineTest {
@@ -58,6 +63,9 @@ public class GamingMachineTest {
         GamingMachine gm = new GamingMachine(this.game, this.cashier);
         gm.connectCard(this.cardToConnect);
         gm.placeBet(100);
+        Set<BetID> allPlayerCardBetIDs = new HashSet<>();
+        allPlayerCardBetIDs.add(gm.currentBet.getBetID());
+        when(this.cardToConnect.returnBetIDs()).thenReturn(allPlayerCardBetIDs);
         MoneyAmount winningAmount = new MoneyAmount(200);
         BetResult winningBet = new BetResult(gm.currentBet, winningAmount);
 
