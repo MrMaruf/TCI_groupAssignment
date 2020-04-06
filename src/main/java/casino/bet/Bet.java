@@ -1,6 +1,6 @@
 package casino.bet;
 
-import ID.BetID;
+import casino.idbuilder.ids.BetID;
 
 /**
  * immutable class.

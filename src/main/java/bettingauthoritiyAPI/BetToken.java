@@ -1,7 +1,7 @@
 package bettingauthoritiyAPI;
 
 
-import ID.BettingRoundID;
+import casino.idbuilder.ids.BettingRoundID;
 
 import java.time.Instant;
 import java.util.Objects;
