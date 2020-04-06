@@ -102,7 +102,8 @@ public class PlayerTest {
 
         //assert
        // Assert.assertNotNull(gamingMachine.getPlayerCard());
-        verify(gamingMachine, times(1)).connectCard(card);
+        verify(gamingMachine, times(2)).connectCard(card);
+        Assert.assertNotNull(gamingMachine.getPlayerCard());
 
 
     }
