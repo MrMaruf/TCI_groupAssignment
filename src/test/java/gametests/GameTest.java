@@ -148,7 +148,7 @@ public class GameTest {
         sut.setBettingRound(betRound);
         sut.setIsBettingFinished(true);
         if (sut.isBettingRoundFinished()) {
-            when(betRound.placeBet(any(Bet.class))).thenReturn(true);
+            when(betRound.placeBet(bet)).thenReturn(true);
             sut.bettingAuthority.getLoggingAuthority().addAcceptedBet(bet, betRound.getBettingRoundID(), gm.getGamingMachineID());
             sut.acceptBet(bet, gm);
 
