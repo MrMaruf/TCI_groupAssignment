@@ -77,4 +77,19 @@ public class GamingMachineTest {
         verify(this.cashier).addAmount(gm.playerCard, winningAmount);
     }
 
+    @Test
+    public void placeBet_With_Amount_PlayerCard_Doesnt_Have_Should_Return_False(){
+        // arrange
+        when(this.game.acceptBet(any(Bet.class), any(IGamingMachine.class))).thenReturn(true);
+        when(this.cashier.checkIfBetIsValid(any(IPlayerCard.class), any(Bet.class))).thenReturn(false);
+        GamingMachine gm = new GamingMachine(this.game, this.cashier);
+        gm.connectCard(this.cardToConnect);
+        boolean betIsValid = false;
+
+        // act
+        betIsValid = gm.placeBet(200);
+
+        // assert
+        Assert.assertFalse(betIsValid);
+    }
 }
