@@ -28,6 +28,9 @@ public class GamingMachine implements IGamingMachine {
         BetID betID = this.playerCard.generateNewBetID();
         Bet bet = new Bet(betID, new MoneyAmount(amountInCents));
         this.currentBet = bet;
+        if(!this.cashier.checkIfBetIsValid(this.playerCard, bet)){
+            return false;
+        }
         return this.game.acceptBet(bet, this);
     }
 
