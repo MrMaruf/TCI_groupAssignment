@@ -112,17 +112,22 @@ public class GameTest {
         Bet bet = mock(Bet.class);
 
         //act
+        sut.setBettingRound(betRound);
+        sut.setIsBettingFinished(true);
         if(sut.isBettingRoundFinished()){
             when(betRound.placeBet(bet)).thenReturn(true);
-            when(betRound.numberOFBetsMade()).thenReturn(1);
-
             sut.bettingAuthority.getLoggingAuthority().addAcceptedBet(bet, betRound.getBettingRoundID(), gm.getGamingMachineID());
+            sut.acceptBet(bet, gm);
+
         }
 
-        sut.acceptBet(bet, gm);
 
-        verify(betRound).placeBet(bet);
-        verify(betRound).numberOFBetsMade();
-        Assert.assertEquals(true, (sut.acceptBet(bet, gm)));
+
+
+
+
+
+        Assert.assertEquals(true, sut.acceptBet(bet, gm));
+
     }
 }
