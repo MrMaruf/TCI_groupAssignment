@@ -2,6 +2,7 @@ package casino.game;
 
 import casino.bet.Bet;
 import casino.bet.BetResult;
+import casino.bet.MoneyAmount;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,6 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class GameRuleTest {
     @Test
@@ -19,6 +21,7 @@ public class GameRuleTest {
         // mocking
         bets.add(mock(Bet.class));
         Bet winningBet = mock(Bet.class);
+        when(winningBet.getMoneyAmount()).thenReturn(new MoneyAmount(100));
         bets.add(winningBet);
         bets.add(mock(Bet.class));
         bets.add(mock(Bet.class));
