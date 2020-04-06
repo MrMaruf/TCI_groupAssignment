@@ -23,7 +23,7 @@ public class BettingRound implements IBettingRound {
 
     @Override
     public boolean placeBet(Bet bet) {
-        return false;
+        return true;
     }
 
     @Override
