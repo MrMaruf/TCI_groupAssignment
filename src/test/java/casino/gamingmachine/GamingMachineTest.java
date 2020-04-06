@@ -26,6 +26,8 @@ public class GamingMachineTest {
         this.game = mock(IGame.class);
         this.cashier = mock(ICashier.class);
         this.cardToConnect = mock(IPlayerCard.class);
+        when(this.game.acceptBet(any(Bet.class), any(IGamingMachine.class))).thenReturn(true);
+        when(this.cashier.checkIfBetIsValid(any(IPlayerCard.class), any(Bet.class))).thenReturn(true);
     }
 
     @Test
@@ -43,7 +45,6 @@ public class GamingMachineTest {
     @Test
     public void placeBet_With_Valid_MoneyAmount_Should_Create_Bet_From_Card_With_MoneyAmount_Pass_It_To_Game_And_Return_True_Test() {
         // arrange
-        when(this.game.acceptBet(any(Bet.class), any(IGamingMachine.class))).thenReturn(true);
         GamingMachine gm = new GamingMachine(this.game, this.cashier);
         gm.connectCard(this.cardToConnect);
         boolean betIsValid = false;
@@ -80,7 +81,6 @@ public class GamingMachineTest {
     @Test
     public void placeBet_With_Amount_PlayerCard_Doesnt_Have_Should_Return_False(){
         // arrange
-        when(this.game.acceptBet(any(Bet.class), any(IGamingMachine.class))).thenReturn(true);
         when(this.cashier.checkIfBetIsValid(any(IPlayerCard.class), any(Bet.class))).thenReturn(false);
         GamingMachine gm = new GamingMachine(this.game, this.cashier);
         gm.connectCard(this.cardToConnect);
@@ -98,7 +98,6 @@ public class GamingMachineTest {
     @Test
     public void placeBet_Second_Time_On_Same_BettingRound_Should_Return_False(){
         // arrange
-        when(this.game.acceptBet(any(Bet.class), any(IGamingMachine.class))).thenReturn(true);
         GamingMachine gm = new GamingMachine(this.game, this.cashier);
         gm.connectCard(this.cardToConnect);
         boolean firstBetIsValid = false;
