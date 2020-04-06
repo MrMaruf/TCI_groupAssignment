@@ -6,8 +6,7 @@ import casino.bet.MoneyAmount;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedHashSet;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -17,7 +16,7 @@ public class GameRuleTest {
     public void determineWinner_Should_Return_The_Correct_betResult_Test(){
         // assign
         IGameRule rule = new GameRule(2);
-        Set<Bet> bets = new HashSet<>();
+        LinkedHashSet<Bet> bets = new LinkedHashSet<>();
         // mocking
         bets.add(mock(Bet.class));
         Bet winningBet = mock(Bet.class);
@@ -31,5 +30,6 @@ public class GameRuleTest {
 
         // assert
         Assert.assertEquals(result.getWinningBet(), winningBet);
+        Assert.assertEquals(result.getAmountWon().getAmountInCents(), 200);
     }
 }

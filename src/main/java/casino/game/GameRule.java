@@ -20,11 +20,7 @@ public class GameRule implements IGameRule {
         List<Bet> allBets = new ArrayList<>(bets);
         Bet winner = allBets.get(randomWinValue % allBets.size());
         MoneyAmount amountWon = null;
-        try {
-            amountWon = new MoneyAmount(winner.getMoneyAmount().getAmountInCents() * 2);
-        }catch (NullPointerException e){
-            System.err.println(e.getMessage());
-        }
+        amountWon = new MoneyAmount(winner.getMoneyAmount().getAmountInCents() * 2);
         return new BetResult(winner, amountWon);
     }
 
