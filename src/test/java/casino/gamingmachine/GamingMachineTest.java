@@ -94,4 +94,24 @@ public class GamingMachineTest {
         Assert.assertNull(gm.currentBet);
         verify(this.cashier).checkIfBetIsValid(eq(this.cardToConnect), any(Bet.class));
     }
+
+    @Test
+    public void placeBet_Second_Time_On_Same_BettingRound_Should_Return_False(){
+        // arrange
+        when(this.game.acceptBet(any(Bet.class), any(IGamingMachine.class))).thenReturn(true);
+        GamingMachine gm = new GamingMachine(this.game, this.cashier);
+        gm.connectCard(this.cardToConnect);
+        boolean firstBetIsValid = false;
+        boolean secondBetIsValid = false;
+
+        // act
+        firstBetIsValid = gm.placeBet(200);
+        secondBetIsValid = gm.placeBet(200);
+
+        // assert
+        Assert.assertTrue(firstBetIsValid);
+        Assert.assertFalse(secondBetIsValid);
+        Assert.assertNotNull(gm.currentBet);
+        verify(this.game, times(1)).acceptBet(gm.currentBet, gm);
+    }
 }
